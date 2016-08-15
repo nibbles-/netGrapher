@@ -1,3 +1,0 @@
-C:\Users\Johan\Documents\Source\netGrapher\netGrapher\bin\Release\netGrapher.exe.config
-C:\Users\Johan\Documents\Source\netGrapher\netGrapher\bin\Release\netGrapher.exe
-C:\Users\Johan\Documents\Source\netGrapher\netGrapher\obj\Release\netGrapher.exe

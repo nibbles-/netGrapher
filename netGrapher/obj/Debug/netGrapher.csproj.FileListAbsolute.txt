@@ -1,6 +1,0 @@
-C:\Users\Johan\Documents\Source\netGrapher\netGrapher\bin\Debug\netGrapher.exe.config
-C:\Users\Johan\Documents\Source\netGrapher\netGrapher\bin\Debug\netGrapher.exe
-C:\Users\Johan\Documents\Source\netGrapher\netGrapher\bin\Debug\netGrapher.pdb
-C:\Users\Johan\Documents\Source\netGrapher\netGrapher\obj\Debug\netGrapher.csprojResolveAssemblyReference.cache
-C:\Users\Johan\Documents\Source\netGrapher\netGrapher\obj\Debug\netGrapher.exe
-C:\Users\Johan\Documents\Source\netGrapher\netGrapher\obj\Debug\netGrapher.pdb

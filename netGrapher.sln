@@ -1,7 +1,8 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
-# SharpDevelop 5.1
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.25428.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "netGrapher", "netGrapher\netGrapher.csproj", "{25BFA0B0-092F-4A02-9438-58C4201E0F78}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Simulationserver", "Simulationserver\Simulationserver.csproj", "{A3472CAD-2A61-483C-BEBC-B387B762E369}"
@@ -20,5 +21,8 @@ Global
 		{A3472CAD-2A61-483C-BEBC-B387B762E369}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A3472CAD-2A61-483C-BEBC-B387B762E369}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A3472CAD-2A61-483C-BEBC-B387B762E369}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 EndGlobal

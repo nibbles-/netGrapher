@@ -13,7 +13,8 @@ namespace Simulationserver
         public static void Main(string[] args)
         {
 
-            //Windows har en urlacl (netsh http show urlacl) med addresser som vanliga användare får använda. Nedan är en sådan som är default så att man slipper hacka windows.
+            // Windows have a urlacl (netsh http show urlacl) with addresses that normal users can use. The below is default so that we dont have to hack windows.
+            // Create a new webserver instance that listens and serves on the specified address. Use sendresponse as handler
             WebServer ws = new WebServer(SendResponse, "http://+:80/Temporary_Listen_Addresses/");
             ws.Run();
             Console.WriteLine("A simple webserver. Press a key to quit.");
@@ -23,7 +24,7 @@ namespace Simulationserver
 
         public static string SendResponse(HttpListenerRequest request)
         {
-            // Måste använda en StreamReader för att kunna läsa requestBodyn.
+            // We need to use a streamreader to use the request body
             string requestBody;
             using (var reader = new System.IO.StreamReader(request.InputStream, request.ContentEncoding))
             {
@@ -33,8 +34,8 @@ namespace Simulationserver
 
             var regmatch = System.Text.RegularExpressions.Regex.Match(requestBody, "[A-Za-z]*$");
             //
-            // Returnera xml-texten formaterad så som CUCM skickar den. Slumpad samtalstrafik och requestBodyn som text för räknaren.
-            // 
+            // Return the xml in a format that looks like it came from the CUCM. Calltraffic is randomized. And the request body is used as counter.
+            //
             return string.Format(@"<?xml version=""1.0"" encoding=""UTF-8"" standalone=""no""?>
 <soapenv:Envelope xmlns:soapenv=""http://schemas.xmlsoap.org/soap/envelope/"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"" xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"">
     <soapenv:Body>
@@ -74,10 +75,10 @@ namespace Simulationserver
       </ns1:perfmonCollectCounterDataResponse>
     </soapenv:Body>
     </soapenv:Envelope>", request.LocalEndPoint.Address.MapToIPv4(), requestBody, Rand.Next(100), Rand.Next(100), regmatch + "_");
-            // LocalEndPoint för att få olika IP i svaret. requestBody innehåller räknaren. Rand för att slumpa samtalstrafik
+            // LocalEndPoint to get different IP in the answer. requestBody contains the counter. Rand to randomize calltrafic
         }
     }
-    // class WebServer är från Internet.
+    // class WebServer is from the internet.
     public class WebServer
     {
         private readonly HttpListener _listener = new HttpListener();

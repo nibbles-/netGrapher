@@ -11,40 +11,41 @@ namespace netGrapher
         public static void Main(string[] args)
         {
         Start:
-            // Temp innan settings är implementerat
+            // Temp before settings is implemented
             string[] counters = { "Cisco SIP", "Cisco MGCP Gateways", "Cisco MGCP PRI Device" };
             string[] servers = { "127.0.0.1", "127.0.0.2" };
 
-            // Skapa delimiters, devicearray, devicestring, devicevalue innan foreach så att ContainsKey funkar
+            // Create delimiters, devicearray, devicestring, devicevalue before foreach so that ContainsKey works
             var delimiters = new char[] { '(', ')' };
             string devicestring = null;
             int devicevalue = 0;
-            // En Dictionary<string, int> för att summera trafikinformationen i
+            // A Dictionary<string, int> to aggregate the traffic info in
             var result = new System.Collections.Generic.Dictionary<string, int>();
-            // loopa igenom alla counters och servrar och spara resultatet result<string, int>
+            // loop through all counters and servers and save the result in result<string,int>
             foreach (var counter in counters)
             {
                 foreach (var server in servers)
                 {
                     try
                     {
-                        // Using används för att stänga resursen efter att den har använts eller något skiter sig
+                        // Using is used to dispose of the resource after it has been used or something happens( runs dispose method)
                         using (var client = new System.Net.WebClient())
                         {
-                            //var url = string.Format(@"http://{0}:443/perfmonservice/services/PerfmonPort",server); // Använd mot CUCM
-                            var url = string.Format(@"http://{0}/Temporary_Listen_Addresses/", server); // Använd vid test mot Simulationserver
+                            //var url = string.Format(@"http://{0}:443/perfmonservice/services/PerfmonPort",server); // Use against CUCM
+                            var url = string.Format(@"http://{0}/Temporary_Listen_Addresses/", server); // Use agains simulation server
                             client.Headers.Add("SOAPAction", "perfmonCollectCounterData");
                             var response = client.UploadString(url, "POST", counter);
                             var xmlResponse = new XmlDocument();
                             xmlResponse.LoadXml(response.ToString());
 
-                            // Letar upp alla "item" taggar i xml-svaret och lopar igenom så att vi kan hantera värdet.
+                            // Finds all "item"-tags in the response and loops through them so that we can deal with the value
                             XmlNodeList nodelist = xmlResponse.GetElementsByTagName("item");
 
                             foreach (XmlNode node in nodelist)
                             {
                                 switch (counter)
                                 {
+                                    // We only want the value in CallsInProgress, PRIChannelsActive or CallsActive so we filter those here.
                                     case "Cisco SIP":
                                         devicestring = System.Text.RegularExpressions.Regex.Match(node["Name"].InnerXml, @"^.*Cisco SIP\((.*)\)\\CallsInProgress$").Groups[1].Value;
                                         break;
@@ -60,7 +61,7 @@ namespace netGrapher
 
                                 devicevalue = Convert.ToInt32(node["Value"].InnerXml);
 
-                                // Om regex matchningen inte får träff så är devicestring tom. Vi vill inte lägga till en tom devicestring i resultDict
+                                // If the regex doesnt match devicestring will be empty. We do not want to add an empty devicestring in the dict.
                                 if (devicestring != "")
                                 {
                                     if (result.ContainsKey(devicestring))
@@ -85,16 +86,15 @@ namespace netGrapher
                 }
             }
 
-            // Gör något vettigt med resultatet
-            // 1. Skapa en teafile för varje device och lägg in aktuell data i den
-            foreach (var item in result)
-            {
+            // Do something useful with the result
+            //
+            //foreach (var item in result)
+            //{
+            //}
 
-            }
-
-            // 2. Skapa en DS för att spara datat
+            // Create a dataset to save the data
             var ds = new System.Data.DataSet();
-            // 2.5 Försök läs in tidigare sparad databas.xml
+            // Try to read a previous databasefile
             try
             {
                 Console.WriteLine("Loading database.xml");
@@ -102,34 +102,36 @@ namespace netGrapher
             }
             catch (System.IO.FileNotFoundException e)
             {
+                // And if that doesnt exist create a new one.
                 Console.WriteLine(e.GetType() + " " + e.Message);
                 Console.WriteLine("Creating a new database.xml");
             }
             catch (System.Xml.XmlException e)
             {
+                // or if it is broken make backup and make new.
                 Console.WriteLine(e.GetType() + " " + e.Message);
                 Console.WriteLine("database.xml is broken so I am saving a backup and creating a new one");
                 System.IO.File.Move("database.xml", "database.xml.broken");
 
             }
 
-            // 3. Loopa igenom result för att mata in datat i ds
+            // Loop through result-dict and add it to the dataset
             foreach (var item in result)
             {
-                // Kolla om det finns en tabell i DS och skapa om inte
+                // Check if the DS contains a table with the device as key
                 if (ds.Tables.Contains(item.Key))
                 {
-                    // Tabellen finns så lägg bara till en ny rad.
+                    // If it does, add the result to it
                     var dr = ds.Tables[item.Key].NewRow();
                     dr[0] = DateTime.Now;
                     dr[1] = (int)item.Value;
-                    //dr[2] = ds.Tables[item.Key].Compute("Max(Value)", String.Empty); <--- Gammal sätt
-                    dr[2] = ds.Tables[item.Key].AsEnumerable().Max(r => Convert.ToInt32(r.Field<string>("Value"))); // <---- Nytt sätt
+                    //dr[2] = ds.Tables[item.Key].Compute("Max(Value)", String.Empty); <--- Old way
+                    dr[2] = ds.Tables[item.Key].AsEnumerable().Max(r => Convert.ToInt32(r.Field<string>("Value"))); // <---- New way
                     ds.Tables[item.Key].Rows.Add(dr);
                 }
                 else
                 {
-                    // Tabellen finns inte så skapa en ny tabell och lägg till värdet i den.
+                    // If it doesnt, create it and add the data
                     var dt = new System.Data.DataTable(item.Key.ToString());
                     dt.Columns.Add("Timestamp", typeof(DateTime));
                     dt.Columns.Add("Value", typeof(int));
@@ -137,15 +139,15 @@ namespace netGrapher
                     var dr = dt.NewRow();
                     dr[0] = DateTime.Now;
                     dr[1] = (int)item.Value;
-                    dr[2] = dr[1]; // Eftersom att det är en ny tabell så blir ju peak samma som nuvarande värde.
+                    dr[2] = dr[1]; // Since it is a new table Value and Peak will be the same
                     dt.Rows.Add(dr);
                     ds.Tables.Add(dt);
                 }
             }
-            // 4. Spara databasen för framtida bruk
+            // Save the database for future use.
             ds.WriteXml("database.xml");
 
-            // 5. Skapa en graf per tabell i datasetet
+            // Create a chart for each table in the dataset
             foreach (System.Data.DataTable table in ds.Tables)
             {
                 var chart = new Chart();
@@ -154,7 +156,7 @@ namespace netGrapher
                 chart.Height = 400;
                 chart.Titles.Add(table.TableName.ToString());
 
-                // 5.1 Skapa en serie till grafen
+                // Create a series for the chart
                 var serie = new Series();
                 serie.Name = "Calls";
                 serie.ChartType = SeriesChartType.SplineArea;
@@ -164,7 +166,8 @@ namespace netGrapher
                 serie.IsValueShownAsLabel = false;
                 serie.XValueMember = "Timestamp";
                 serie.YValueMembers = "Value";
-                // 5.1.1 Skapa en maxvärde serie
+
+                // Create a Peak-value series. This will always lag one update behind
                 var serieMax = new Series();
                 serieMax.Name = "Peak";
                 serieMax.ChartType = SeriesChartType.Line;
@@ -174,10 +177,11 @@ namespace netGrapher
                 serieMax.IsValueShownAsLabel = false;
                 serieMax.XValueMember = "Timestamp";
                 serieMax.YValueMembers = "Peak";
-                // 5.1.2 Lägg till serierna i charten
+                // Add the series
                 chart.Series.Add(serieMax);
                 chart.Series.Add(serie);
-                // 5.2 Skapa ett grafområde
+
+                // Create a chart area
                 var ca = new ChartArea();
                 ca.Name = table.ToString();
                 //ca.BackColor = Color.White;
@@ -191,22 +195,23 @@ namespace netGrapher
                 ca.AxisY.Interval = 10;
                 //ca.AxisX.IsReversed = true;
                 //ca.AxisX.Maximum = 288;
+                ca.AxisX.Interval = 0;
                 chart.ChartAreas.Add(ca);
 
-                // 5.3 Skapa en legend
+                // Create a legend for the chart
                 var legend = new Legend();
                 legend.IsTextAutoFit = true;
                 chart.Legends.Add(legend);
 
-                // 5.4 databind ??
+                // Databind. Do not know what this does but internet said it had to be here
                 chart.DataBind();
 
-                // 5.5 Spara som en png.
+                // Save as PNG
                 chart.SaveImage(table.ToString() + ".png", ChartImageFormat.Png);
             }
 
 
-            // Det absolut sista som händer. Bör tas bort innan release
+            // The last that happens. Should be removed/tweaked before release
             Console.WriteLine("Done. Sover i 10 och kör igen");
             System.Threading.Thread.Sleep(10000);
             goto Start;

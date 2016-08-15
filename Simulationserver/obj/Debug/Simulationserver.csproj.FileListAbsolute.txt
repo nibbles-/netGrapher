@@ -1,0 +1,6 @@
+C:\Users\Johan\Documents\Source\netGrapher\Simulationserver\bin\Debug\Simulationserver.exe.config
+C:\Users\Johan\Documents\Source\netGrapher\Simulationserver\bin\Debug\Simulationserver.exe
+C:\Users\Johan\Documents\Source\netGrapher\Simulationserver\bin\Debug\Simulationserver.pdb
+C:\Users\Johan\Documents\Source\netGrapher\Simulationserver\obj\Debug\Simulationserver.csprojResolveAssemblyReference.cache
+C:\Users\Johan\Documents\Source\netGrapher\Simulationserver\obj\Debug\Simulationserver.exe
+C:\Users\Johan\Documents\Source\netGrapher\Simulationserver\obj\Debug\Simulationserver.pdb

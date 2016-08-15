@@ -1,0 +1,153 @@
+<?xml version="1.0" standalone="yes"?>
+<NewDataSet>
+  <SIP_Trunk_1>
+    <Timestamp>2016-08-08T20:54:44.4101533+02:00</Timestamp>
+    <Value>86</Value>
+    <Peak>86</Peak>
+  </SIP_Trunk_1>
+  <SIP_Trunk_1>
+    <Timestamp>2016-08-08 20:54:54</Timestamp>
+    <Value>80</Value>
+    <Peak>86</Peak>
+  </SIP_Trunk_1>
+  <SIP_Trunk_1>
+    <Timestamp>2016-08-08 20:55:04</Timestamp>
+    <Value>97</Value>
+    <Peak>86</Peak>
+  </SIP_Trunk_1>
+  <SIP_Trunk_1>
+    <Timestamp>2016-08-08 20:55:14</Timestamp>
+    <Value>174</Value>
+    <Peak>97</Peak>
+  </SIP_Trunk_1>
+  <SIP_Trunk_1>
+    <Timestamp>2016-08-08 20:55:24</Timestamp>
+    <Value>93</Value>
+    <Peak>174</Peak>
+  </SIP_Trunk_1>
+  <SIP_Trunk_2>
+    <Timestamp>2016-08-08T20:54:44.4106534+02:00</Timestamp>
+    <Value>117</Value>
+    <Peak>117</Peak>
+  </SIP_Trunk_2>
+  <SIP_Trunk_2>
+    <Timestamp>2016-08-08 20:54:54</Timestamp>
+    <Value>47</Value>
+    <Peak>117</Peak>
+  </SIP_Trunk_2>
+  <SIP_Trunk_2>
+    <Timestamp>2016-08-08 20:55:04</Timestamp>
+    <Value>137</Value>
+    <Peak>117</Peak>
+  </SIP_Trunk_2>
+  <SIP_Trunk_2>
+    <Timestamp>2016-08-08 20:55:14</Timestamp>
+    <Value>71</Value>
+    <Peak>137</Peak>
+  </SIP_Trunk_2>
+  <SIP_Trunk_2>
+    <Timestamp>2016-08-08 20:55:24</Timestamp>
+    <Value>126</Value>
+    <Peak>137</Peak>
+  </SIP_Trunk_2>
+  <Gateways_Trunk_1>
+    <Timestamp>2016-08-08T20:54:44.4106534+02:00</Timestamp>
+    <Value>89</Value>
+    <Peak>89</Peak>
+  </Gateways_Trunk_1>
+  <Gateways_Trunk_1>
+    <Timestamp>2016-08-08 20:54:54</Timestamp>
+    <Value>111</Value>
+    <Peak>89</Peak>
+  </Gateways_Trunk_1>
+  <Gateways_Trunk_1>
+    <Timestamp>2016-08-08 20:55:04</Timestamp>
+    <Value>73</Value>
+    <Peak>111</Peak>
+  </Gateways_Trunk_1>
+  <Gateways_Trunk_1>
+    <Timestamp>2016-08-08 20:55:14</Timestamp>
+    <Value>110</Value>
+    <Peak>111</Peak>
+  </Gateways_Trunk_1>
+  <Gateways_Trunk_1>
+    <Timestamp>2016-08-08 20:55:24</Timestamp>
+    <Value>153</Value>
+    <Peak>111</Peak>
+  </Gateways_Trunk_1>
+  <Gateways_Trunk_2>
+    <Timestamp>2016-08-08T20:54:44.4106534+02:00</Timestamp>
+    <Value>135</Value>
+    <Peak>135</Peak>
+  </Gateways_Trunk_2>
+  <Gateways_Trunk_2>
+    <Timestamp>2016-08-08 20:54:54</Timestamp>
+    <Value>114</Value>
+    <Peak>135</Peak>
+  </Gateways_Trunk_2>
+  <Gateways_Trunk_2>
+    <Timestamp>2016-08-08 20:55:04</Timestamp>
+    <Value>126</Value>
+    <Peak>135</Peak>
+  </Gateways_Trunk_2>
+  <Gateways_Trunk_2>
+    <Timestamp>2016-08-08 20:55:14</Timestamp>
+    <Value>106</Value>
+    <Peak>135</Peak>
+  </Gateways_Trunk_2>
+  <Gateways_Trunk_2>
+    <Timestamp>2016-08-08 20:55:24</Timestamp>
+    <Value>148</Value>
+    <Peak>135</Peak>
+  </Gateways_Trunk_2>
+  <Device_Trunk_1>
+    <Timestamp>2016-08-08T20:54:44.4106534+02:00</Timestamp>
+    <Value>70</Value>
+    <Peak>70</Peak>
+  </Device_Trunk_1>
+  <Device_Trunk_1>
+    <Timestamp>2016-08-08 20:54:54</Timestamp>
+    <Value>122</Value>
+    <Peak>70</Peak>
+  </Device_Trunk_1>
+  <Device_Trunk_1>
+    <Timestamp>2016-08-08 20:55:04</Timestamp>
+    <Value>104</Value>
+    <Peak>122</Peak>
+  </Device_Trunk_1>
+  <Device_Trunk_1>
+    <Timestamp>2016-08-08 20:55:14</Timestamp>
+    <Value>50</Value>
+    <Peak>122</Peak>
+  </Device_Trunk_1>
+  <Device_Trunk_1>
+    <Timestamp>2016-08-08 20:55:24</Timestamp>
+    <Value>54</Value>
+    <Peak>122</Peak>
+  </Device_Trunk_1>
+  <Device_Trunk_2>
+    <Timestamp>2016-08-08T20:54:44.4106534+02:00</Timestamp>
+    <Value>38</Value>
+    <Peak>38</Peak>
+  </Device_Trunk_2>
+  <Device_Trunk_2>
+    <Timestamp>2016-08-08 20:54:54</Timestamp>
+    <Value>109</Value>
+    <Peak>38</Peak>
+  </Device_Trunk_2>
+  <Device_Trunk_2>
+    <Timestamp>2016-08-08 20:55:04</Timestamp>
+    <Value>137</Value>
+    <Peak>109</Peak>
+  </Device_Trunk_2>
+  <Device_Trunk_2>
+    <Timestamp>2016-08-08 20:55:14</Timestamp>
+    <Value>111</Value>
+    <Peak>137</Peak>
+  </Device_Trunk_2>
+  <Device_Trunk_2>
+    <Timestamp>2016-08-08 20:55:24</Timestamp>
+    <Value>91</Value>
+    <Peak>137</Peak>
+  </Device_Trunk_2>
+</NewDataSet>
